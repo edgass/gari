@@ -17,40 +17,68 @@ class ClientDashboard extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            SizedBox(),
             Text("Que souhaitez vous faire ?",textAlign: TextAlign.center,style: TextStyle(fontStyle: FontStyle.italic),),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Container(
-                width: MediaQuery.of(context).size.width*0.5,
-                height: 100,
-                child: ElevatedButton(// foreground
-                  onPressed: () { },
-                  child: Text('Commander une livraison',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateColor.resolveWith((states) => apCol),
+            Column(
+              children: [
+                GestureDetector(
+                  onTap: null,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: apCol,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      width: MediaQuery.of(context).size.width*0.5,
+                     height: 120,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text('Commander une livraison',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(),
+                              Image.asset("assets/images/moto.png"),
+                              Image.asset("assets/images/auto.png"),
+                              SizedBox(),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Container(
-                width: MediaQuery.of(context).size.width*0.5,
-                height: 100,
-                child: ElevatedButton(// foreground
-                  onPressed: () {
-                    Get.to(()=>ClientHome());
-                  },
-                  child: Text('Suivre mon colis',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateColor.resolveWith((states) => apCol),
+                GestureDetector(
+                  onTap: ()=>Get.to(()=>ClientHome()),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: apCol,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      width: MediaQuery.of(context).size.width*0.5,
+                      height: 120,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text('Suivre mon colis',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                          Image.asset("assets/images/coli.png"),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
+            SizedBox()
           ],
         ),
       ),

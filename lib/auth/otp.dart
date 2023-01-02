@@ -1,18 +1,33 @@
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gari/auth/footer.dart';
-import 'package:gari/auth/form.dart';
-import 'package:gari/client/client_dashboard.dart';
-import 'package:gari/deliver/deliver_home.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:pinput/pinput.dart';
-class Otp extends StatelessWidget {
+
+
+import 'package:pinput/pinput.dart';import 'controller/auth_controller.dart';
+class Otp extends StatefulWidget {
   const Otp({Key? key}) : super(key: key);
 
   @override
+  State<Otp> createState() => _OtpState();
+}
+
+class _OtpState extends State<Otp> {
+  final pinController = TextEditingController();
+  final focusNode = FocusNode();
+
+  @override
+  void dispose() {
+    pinController.dispose();
+    focusNode.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    AuthController authController = Get.find<AuthController>();
     Color apCol = Theme.of(context).primaryColor;
     return Scaffold(
       body: Center(
@@ -29,21 +44,27 @@ class Otp extends StatelessWidget {
               SizedBox(height: 25,),
               SizedBox(height: 10,),
               Pinput(
-               // length: 6,
+               length: 6,
+                controller: pinController,
+                focusNode: focusNode,
+                androidSmsAutofillMethod:AndroidSmsAutofillMethod.smsRetrieverApi,
                // defaultPinTheme: defaultPinTheme,
                // focusedPinTheme: focusedPinTheme,
                // submittedPinTheme: submittedPinTheme,
-                validator: (s) {
+            /*    validator: (s) {
                   return s == '1234' || s == '4321' ? null : 'Code Incorrect';
-                },
+                },*/
                 pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
                 pinAnimationType: PinAnimationType.scale,
                 showCursor: true,
-                onCompleted: (pin){
-                  if(pin == '1234'){
-                    Get.to(()=>ClientDashboard());
-                  }else if(pin == '4321'){
-                    Get.to(()=>DeliverHome());
+                onCompleted: (pin) async{
+                  try{
+                    PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: authController.verify, smsCode: pin);
+                    // Sign the user in (or link) with the credential
+                    await auth.signInWithCredential(credential);
+                    print("Success : User is Signed");
+                  }catch(e){
+                    print("Erreur lors de la verification du code");
                   }
                 },
               ),
@@ -56,6 +77,11 @@ class Otp extends StatelessWidget {
                     onPressed: () { },
                     child: Text('Renvoyer le code',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                       style: ButtonStyle(
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0)
+                            )
+                        ),
                         backgroundColor: MaterialStateColor.resolveWith((states) => apCol),
                       ),
                   ),

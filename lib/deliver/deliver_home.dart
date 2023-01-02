@@ -35,6 +35,11 @@ class DeliverHome extends StatelessWidget {
                         height: 50,
                         child: ElevatedButton(
                           style: ButtonStyle(
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.0)
+                                )
+                            ),
                             backgroundColor: MaterialStateColor.resolveWith((states) => apCol),
                           ),// foreground
                           onPressed: () { Get.to(()=>DemarcheColi());},

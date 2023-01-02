@@ -9,7 +9,7 @@ class ColiCodeGenerateForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 12.0),
+          padding: const EdgeInsets.only(left: 15.0),
           child: Text("Client",style: TextStyle(color: apCol,fontSize: 16,fontWeight: FontWeight.bold),),
         ),
         SizedBox(height: 5,),
@@ -23,7 +23,7 @@ class ColiCodeGenerateForm extends StatelessWidget {
               hintText: 'Nom du Client',
 
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
 
               ),
@@ -41,7 +41,7 @@ class ColiCodeGenerateForm extends StatelessWidget {
               hintText: 'Adresse du Client',
 
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
 
               ),
@@ -54,7 +54,7 @@ class ColiCodeGenerateForm extends StatelessWidget {
 
 
         Padding(
-          padding: const EdgeInsets.only(left: 12.0),
+          padding: const EdgeInsets.only(left: 15.0),
           child: Text("Point de livraison",style: TextStyle(color: apCol,fontSize: 16,fontWeight: FontWeight.bold),),
         ),
         SizedBox(height: 5,),
@@ -68,7 +68,7 @@ class ColiCodeGenerateForm extends StatelessWidget {
               hintText: 'Adresse de livraison',
 
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
 
               ),
@@ -86,7 +86,7 @@ class ColiCodeGenerateForm extends StatelessWidget {
               hintText: 'Nom du destinataire',
 
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
 
               ),
@@ -101,14 +101,14 @@ class ColiCodeGenerateForm extends StatelessWidget {
             keyboardType: TextInputType.phone,
             decoration: InputDecoration(
               filled: true,
-              prefix: Text("+221",style: TextStyle(color: apCol),),
+            //  prefix: Text("+221",style: TextStyle(color: apCol),),
               isDense: true,
               contentPadding: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
 
               hintText: 'Numéro du destinataire',
 
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30),
+                borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide.none,
 
               ),
@@ -125,7 +125,12 @@ class ColiCodeGenerateForm extends StatelessWidget {
               width: MediaQuery.of(context).size.width*0.5,
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateColor.resolveWith((states) => Colors.black54),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12.0)
+                      )
+                  ),
+                  backgroundColor: MaterialStateColor.resolveWith((states) => Colors.black45),
                 ),// foreground
                 onPressed: () { },
                 child: Text('Générer un code de suivi colis',style: TextStyle(color: Colors.white),),

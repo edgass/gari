@@ -18,7 +18,7 @@ class Timeline extends StatelessWidget {
                 hintText: 'Rechercher votre colis (N° colis)',
 
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide.none,
                 ),
               ),

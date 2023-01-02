@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -7,6 +8,7 @@ class SettingHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color apCol = Theme.of(context).primaryColor;
+    final _auth = FirebaseAuth.instance;
     return Column(
       children: [
         Image.asset('assets/logo/logo_gari_vert.png',width: 150,),
@@ -23,7 +25,7 @@ class SettingHeader extends StatelessWidget {
           ),
         ),
         SizedBox(height: 15,),
-        Text("+221 77 247 77 30",textAlign: TextAlign.center,style: TextStyle(color: apCol,fontWeight: FontWeight.bold,fontSize: 20),)
+        Text(_auth.currentUser?.phoneNumber ?? "",textAlign: TextAlign.center,style: TextStyle(color: apCol,fontWeight: FontWeight.bold,fontSize: 20),)
       ],
     );
   }

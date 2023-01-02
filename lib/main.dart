@@ -1,16 +1,25 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gari/auth/login.dart';
 import 'package:gari/client/client_home.dart';
 import 'package:gari/deliver/deliver_home.dart';
+import 'package:gari/setting/_setting_home.dart';
+import 'package:gari/utils/binding.dart';
 import 'package:get/get.dart';
 
+import 'auth/_auth.dart';
 import 'auth/otp.dart';
 import 'client/client_dashboard.dart';
 import 'deliver/demarche/_demarche_coli.dart';
+import 'home_page.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  HomeBinding().dependencies();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Color(0x70bccc),
@@ -18,11 +27,12 @@ void main() {
 
     )
   );
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final _auth = FirebaseAuth.instance;
+  MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -50,8 +60,17 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF70bccc),
       ),
       //home:  ClientHome(),
-     // home:  DemarcheColi(),
-      home:  Login(),
+   //   home:  DeliverHome(),
+      home:  StreamBuilder<User?>(
+        stream: _auth.authStateChanges(),
+        builder: (context,snapshot){
+          print(FirebaseAuth.instance.currentUser);
+        //  return snapshot.data == null ? const Auth() : _auth.currentUser?.phoneNumber =="+221772477730" ? ClientDashboard() : DeliverHome();
+         // return snapshot.data == null ? const Auth() : HomePage();
+          return snapshot.data == null ? const Login() : HomePage();
+        //  return  DeliverHome();
+        },
+      ),
     );
   }
 }

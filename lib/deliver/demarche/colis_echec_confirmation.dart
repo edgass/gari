@@ -84,6 +84,11 @@ class _ColisEchecConfirmationState extends State<ColisEchecConfirmation> {
                       child: ElevatedButton(// foreground
                         onPressed: () { },
                         style: ButtonStyle(
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0)
+                              )
+                          ),
                           backgroundColor: MaterialStateColor.resolveWith((states) => apCol),
                         ),
                         child: const Text('Envoyer',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
@@ -105,6 +110,11 @@ class _ColisEchecConfirmationState extends State<ColisEchecConfirmation> {
               onPressed: () { },
               child: const Text('Envoyer',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
               style: ButtonStyle(
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0)
+                    )
+                ),
                 backgroundColor: MaterialStateColor.resolveWith((states) => apCol),
               ),
             ),

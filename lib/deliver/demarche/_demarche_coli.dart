@@ -32,6 +32,11 @@ class DemarcheColi extends StatelessWidget {
                   height: 40,
                   child: ElevatedButton(
                     style: ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0)
+                          )
+                      ),
                       backgroundColor: MaterialStateColor.resolveWith((states) => Colors.grey),
                     ),//  foreground
                     onPressed: () => Get.defaultDialog(

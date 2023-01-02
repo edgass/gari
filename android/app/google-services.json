@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "561260698242",
+    "project_id": "gari-bfeb2",
+    "storage_bucket": "gari-bfeb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561260698242:android:327d5c3f5ce07cb4c0729b",
+        "android_client_info": {
+          "package_name": "com.example.gari"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561260698242-3s0nk094nfdhi8ivusfr1q5l0rnjje29.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRHLTTjRWP5DbJoaRC-ViKyZXv1a8-K18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561260698242-3s0nk094nfdhi8ivusfr1q5l0rnjje29.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

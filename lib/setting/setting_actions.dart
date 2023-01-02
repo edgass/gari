@@ -10,18 +10,44 @@ class SettingActions extends StatelessWidget {
         children: [
           Text("Et si vous completiez votre profil !",style: TextStyle(fontStyle: FontStyle.italic),),
           SizedBox(height: 5,),
-          ElevatedButton(
+          Container(
+            width: MediaQuery.of(context).size.width*0.7,
+            height: 50,
+            child: ElevatedButton(// foreground
               onPressed: null,
-              child: Text("Ajouter mes informations")),
+              child: Text("Ajouter mes informations"),
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)
+                    )
+                ),
+             //   backgroundColor: MaterialStateColor.resolveWith((states) => Colors.redAccent),
+              ),
+            ),
+          ),
 
 
           SizedBox(height: 35,),
 
           Text("Vous etes livreur ? Vous souhaitez travailler avec Gari ?",style: TextStyle(fontStyle: FontStyle.italic),),
           SizedBox(height: 5,),
-          ElevatedButton(
+          Container(
+            width: MediaQuery.of(context).size.width*0.7,
+            height: 50,
+            child: ElevatedButton(// foreground
               onPressed: null,
-              child: Text("Envoyer une demande"))
+              child: Text("Envoyer une demande"),
+              style: ButtonStyle(
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)
+                    )
+                ),
+              //  backgroundColor: MaterialStateColor.resolveWith((states) => Colors.redAccent),
+              ),
+            ),
+          ),
         ],
       ),
     );

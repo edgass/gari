@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gari/auth/_auth.dart';
 import 'package:gari/setting/setting_actions.dart';
 import 'package:gari/setting/setting_header.dart';
 import 'package:get/get.dart';
@@ -11,6 +13,7 @@ class SettingHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color apCol = Theme.of(context).primaryColor;
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -24,9 +27,17 @@ class SettingHome extends StatelessWidget {
                 width: MediaQuery.of(context).size.width*0.7,
                 height: 50,
                 child: ElevatedButton(// foreground
-                  onPressed: ()=> Get.offAll(()=>Login()),
+                  onPressed: (){
+                    FirebaseAuth.instance.signOut();
+                    Get.offAll(()=>Login());
+                  },
                   child: Text('Se deconnecter',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                   style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0)
+                        )
+                    ),
                     backgroundColor: MaterialStateColor.resolveWith((states) => Colors.redAccent),
                   ),
                 ),

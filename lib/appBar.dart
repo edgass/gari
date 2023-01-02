@@ -27,11 +27,6 @@ class MyAppBar extends StatelessWidget {
       centerTitle: true,
       title : Image.asset('assets/images/gariLogo.png',width: 75),
       backgroundColor: const Color(0xFF70bccc),
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(20),
-        ),
-      ),
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(45.0),
         child:  Container(
