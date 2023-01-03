@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gari/deliver/controller/order_controller.dart';
 import 'package:gari/deliver/demarche/_demarche_coli.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -10,6 +11,7 @@ class DeliverHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    OrderController orderController = Get.find<OrderController>();
     Color apCol = Theme.of(context).primaryColor;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -25,7 +27,13 @@ class DeliverHome extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ColiCodeGenerateForm(),
-                Expanded(child: Center(child: Text("GARI45",textAlign:TextAlign.center,style: TextStyle(color: Colors.red,fontSize: 30,fontWeight: FontWeight.bold),))),
+                Expanded(child: Center(
+                    child: GetBuilder<OrderController>(
+                  builder:(value)=> value.currentOrder != null ?
+                  Text(value.currentOrder?.id ?? "",textAlign:TextAlign.center,style: TextStyle(color: Colors.red,fontSize: 30,fontWeight: FontWeight.bold),) :
+                  Text("",textAlign:TextAlign.center,style: TextStyle(color: Colors.red,fontSize: 30,fontWeight: FontWeight.bold),)
+
+                    ))),
                 Column(
                   children: [
                     Padding(
@@ -42,7 +50,7 @@ class DeliverHome extends StatelessWidget {
                             ),
                             backgroundColor: MaterialStateColor.resolveWith((states) => apCol),
                           ),// foreground
-                          onPressed: () { Get.to(()=>DemarcheColi());},
+                          onPressed: () { Get.to(()=>DemarcheColi(order: orderController.currentOrder,));},
                           child: Text('GO',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
                         ),
                       ),

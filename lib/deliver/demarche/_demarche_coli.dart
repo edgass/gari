@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gari/appBar.dart';
+import 'package:gari/deliver/controller/order_controller.dart';
 import 'package:gari/deliver/demarche/actions.dart';
 import 'package:gari/deliver/demarche/colis_echec_confirmation.dart';
 import 'package:gari/deliver/demarche/infos_colis.dart';
+import 'package:gari/models/order_model.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 class DemarcheColi extends StatelessWidget {
-  const DemarcheColi({Key? key}) : super(key: key);
+  OrderModel? order;
+  DemarcheColi({Key? key,required this.order}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    OrderController orderController = Get.find<OrderController>();
     Color apCol = Theme.of(context).primaryColor;
     return Scaffold(
         resizeToAvoidBottomInset:false,
@@ -23,7 +27,7 @@ class DemarcheColi extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InfoColis(),
+              InfoColis(orderModel: orderController.currentOrder,),
               Expanded(child: ColisActions()),
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gari/appBar.dart';
+import 'package:gari/deliver/deliver_home.dart';
+import 'package:gari/deliver/search_commands/search_command_page.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import 'client_home.dart';
-class ClientDashboard extends StatelessWidget {
-  const ClientDashboard({Key? key}) : super(key: key);
+class DeliverDashboard extends StatelessWidget {
+  const DeliverDashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,23 +26,7 @@ class ClientDashboard extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: (){
-                    Get.defaultDialog(title: "Contacter le livreur",titleStyle: TextStyle(color: apCol),content: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                      GestureDetector(
-                        onTap : null,
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Icon(Icons.call,size: 35,color: Colors.blue,),
-                        ),
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.all(25.0),
-                        child: Icon(Icons.whatsapp,size: 35,color: Colors.green,),
-                      )
-                      ],
-                    ));
+                    Get.to(()=>const DeliverHome());
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20.0),
@@ -51,12 +36,12 @@ class ClientDashboard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       width: MediaQuery.of(context).size.width*0.5,
-                     height: 120,
+                      height: 120,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('Commander une livraison',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                          Text('Demarrer une livraison',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,7 +58,7 @@ class ClientDashboard extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: ()=>Get.to(()=>ClientHome()),
+                  onTap: ()=>Get.to(()=>const SearchCommandPage()),
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Container(
@@ -87,7 +72,7 @@ class ClientDashboard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('Suivre mon colis',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                          Text('Poursuivre une livraison',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                           Image.asset("assets/images/coli.png"),
                         ],
                       ),

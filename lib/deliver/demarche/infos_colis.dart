@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gari/models/order_model.dart';
 class InfoColis extends StatelessWidget {
-  const InfoColis({Key? key}) : super(key: key);
+  OrderModel? orderModel ;
+   InfoColis({Key? key,required this.orderModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -8,8 +10,8 @@ class InfoColis extends StatelessWidget {
     return Column(
       children: [
         Text("Info Client :",style: TextStyle(color: apCol,fontSize: 15,fontWeight: FontWeight.bold),),
-        Text("Yadali Sarr",style: TextStyle(fontSize: 10)),
-        Text("54 Rue Khalid Dakar",style: TextStyle(fontSize: 10)),
+        Text(orderModel?.clientName ?? "",style: TextStyle(fontSize: 10)),
+        Text(orderModel?.clientAddress ?? "",style: TextStyle(fontSize: 10)),
         Text("77 564 84 10",style: TextStyle(color: Colors.blue,fontSize: 10,fontWeight: FontWeight.bold)),
 
 
@@ -17,15 +19,15 @@ class InfoColis extends StatelessWidget {
 
 
         Text("Destination :",style: TextStyle(color: apCol,fontSize: 15,fontWeight: FontWeight.bold),),
-        Text("Resto Fallou Mbacké: 78 rue Albert",style: TextStyle(fontSize: 10)),
+        Text(orderModel?.recipientAddress ?? "",style: TextStyle(fontSize: 10)),
         Text("Camus Rufisque",style: TextStyle(fontSize: 10)),
         Text("Nafyssatou Gnane",style: TextStyle(fontSize: 10)),
-        Text("77 823 24 12",style: TextStyle(color: Colors.blue,fontSize: 10,fontWeight: FontWeight.bold)),
+        Text(orderModel?.recipientNumber ?? "",style: TextStyle(color: Colors.blue,fontSize: 10,fontWeight: FontWeight.bold)),
 
         SizedBox(height: 10,),
 
 
-        Text("GARI45",style: TextStyle(color: Colors.red,fontSize: 15,fontWeight: FontWeight.bold),)
+        Text(orderModel?.id ?? "",style: TextStyle(color: Colors.red,fontSize: 15,fontWeight: FontWeight.bold),)
       ],
     );
   }

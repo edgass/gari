@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:gari/auth/_auth.dart';
+import 'package:gari/auth/controller/auth_controller.dart';
+import 'package:gari/deliver/controller/order_controller.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 class ColiCodeGenerateForm extends StatelessWidget {
   const ColiCodeGenerateForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Color apCol = Theme.of(context).primaryColor;
+    OrderController orderController = Get.find<OrderController>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -16,6 +22,9 @@ class ColiCodeGenerateForm extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width*0.8,
           child: TextField(
+            onChanged: (value){
+              orderController.setClientName(value);
+            },
             decoration: InputDecoration(
               isDense: true,
               contentPadding: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
@@ -34,6 +43,9 @@ class ColiCodeGenerateForm extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width*0.8,
           child: TextField(
+            onChanged: (value){
+              orderController.setClientAdress(value);
+            },
             decoration: InputDecoration(
               isDense: true,
               contentPadding: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
@@ -61,6 +73,9 @@ class ColiCodeGenerateForm extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width*0.8,
           child: TextField(
+            onChanged: (value){
+              orderController.setDeliverAdress(value);
+            },
             decoration: InputDecoration(
               isDense: true,
               contentPadding: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
@@ -79,6 +94,9 @@ class ColiCodeGenerateForm extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width*0.8,
           child: TextField(
+            onChanged: (value){
+              orderController.setDestName(value);
+            },
             decoration: InputDecoration(
               isDense: true,
               contentPadding: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
@@ -97,7 +115,9 @@ class ColiCodeGenerateForm extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width*0.8,
           child: TextField(
-
+            onChanged: (value){
+              orderController.setDestNum(value);
+            },
             keyboardType: TextInputType.phone,
             decoration: InputDecoration(
               filled: true,
@@ -132,8 +152,16 @@ class ColiCodeGenerateForm extends StatelessWidget {
                   ),
                   backgroundColor: MaterialStateColor.resolveWith((states) => Colors.black45),
                 ),// foreground
-                onPressed: () { },
-                child: Text('Générer un code de suivi colis',style: TextStyle(color: Colors.white),),
+                onPressed: () {
+                  orderController.createOrder().then((value) => print(value));
+                },
+                child: GetBuilder<OrderController> (
+                 // initState: orderController(),
+                  builder: (value)=>value.createOrderStatus == CreateOrderEnum.CREATING ? Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: CircularProgressIndicator(),
+                  )  : Text('Générer un code de suivi colis',style: TextStyle(color: Colors.white),),
+                ),
               ),
             ),
           ),
