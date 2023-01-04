@@ -64,10 +64,10 @@ class MyApp extends StatelessWidget {
       home:  StreamBuilder<User?>(
         stream: _auth.authStateChanges(),
         builder: (context,snapshot){
-          print(FirebaseAuth.instance.currentUser);
         //  return snapshot.data == null ? const Auth() : _auth.currentUser?.phoneNumber =="+221772477730" ? ClientDashboard() : DeliverHome();
          // return snapshot.data == null ? const Auth() : HomePage();
-          return snapshot.data == null ? const Login() : HomePage();
+
+          return snapshot.data == null ? const Login() : const HomePage();
         //  return  DeliverHome();
         },
       ),

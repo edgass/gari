@@ -49,12 +49,19 @@ class OrderController extends GetxController{
 
 //  RxList<OrderModel> orderList = (List<OrderModel>.of([])).obs;
 
+
+
   final _auth = FirebaseAuth.instance;
 
   @override
   void onInit() {
     fetchSingleOrder();
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   setIdOrderToSearch(String? orderId){
@@ -100,8 +107,10 @@ class OrderController extends GetxController{
     update();
   }
 
-  initializeOrderListFetchingPage(){
+  initializeOrderController(){
     currentOrder =null;
+    createOrderStatus = CreateOrderEnum.INITIAL;
+    fetchOrderStatus  = FetchOrderEnum.INITIAL;
   }
 
 
@@ -136,7 +145,7 @@ class OrderController extends GetxController{
           setFetchOrderStatus(FetchOrderEnum.ERROR);
           throw Exception("Erreur de fetch "+e.toString());
         }
-        await Future.delayed(Duration(seconds: 5));
+        await Future.delayed(Duration(seconds: 2));
         yield eventList;
       }
     }

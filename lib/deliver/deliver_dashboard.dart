@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gari/appBar.dart';
+import 'package:gari/deliver/controller/order_controller.dart';
 import 'package:gari/deliver/deliver_home.dart';
 import 'package:gari/deliver/search_commands/search_command_page.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ class DeliverDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color apCol = Theme.of(context).primaryColor;
+    OrderController orderController = Get.find<OrderController>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(85),
@@ -26,6 +28,7 @@ class DeliverDashboard extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: (){
+                    orderController.initializeOrderController();
                     Get.to(()=>const DeliverHome());
                   },
                   child: Padding(
@@ -58,7 +61,10 @@ class DeliverDashboard extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: ()=>Get.to(()=>const SearchCommandPage()),
+                  onTap: ()=> {
+                    orderController.initializeOrderController(),
+                    Get.to(() => const SearchCommandPage())
+                  },
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Container(

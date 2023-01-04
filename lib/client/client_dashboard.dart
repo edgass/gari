@@ -1,26 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:gari/appBar.dart';
+import 'package:gari/client/tracking_controller.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'client_home.dart';
 class ClientDashboard extends StatelessWidget {
-  const ClientDashboard({Key? key}) : super(key: key);
+   ClientDashboard({Key? key}) : super(key: key);
+  String phoneNumber = '00221784029122';
+  String message = 'Bonjour GARI, je voudrais commander une livraison. Merci';
+   _makingPhoneCall() async {
+     var url = Uri.parse("tel:$phoneNumber");
+     if (await canLaunchUrl(url)) {
+       await launchUrl(url);
+     } else {
+       throw 'Could not launch $url';
+     }
+   }
+
+   _sendingWhatsappMessage() async {
+     var url = Uri.parse("https://wa.me/$phoneNumber/?text=${Uri.parse(message)}");
+     if (await canLaunchUrl(url)) {
+       await launchUrl(url);
+     } else {
+       throw 'Could not launch $url';
+     }
+   }
+
+   _sendingSms() async {
+     var url = Uri.parse("sms:$phoneNumber?body=$message");
+     if (await canLaunchUrl(url)) {
+       await launchUrl(url);
+     } else {
+       throw 'Could not launch $url';
+     }
+   }
 
   @override
   Widget build(BuildContext context) {
+     TrackingController trackingController = Get.find<TrackingController>();
     Color apCol = Theme.of(context).primaryColor;
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(85),
+        preferredSize: const Size.fromHeight(85),
         child: MyAppBar(pageTitle: 'Acceuil'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(),
-            Text("Que souhaitez vous faire ?",textAlign: TextAlign.center,style: TextStyle(fontStyle: FontStyle.italic),),
+            const SizedBox(),
+            const Text("Que souhaitez vous faire ?",textAlign: TextAlign.center,style: TextStyle(fontStyle: FontStyle.italic),),
             Column(
               children: [
                 GestureDetector(
@@ -29,17 +60,27 @@ class ClientDashboard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                       GestureDetector(
-                        onTap : null,
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
+                        onTap : ()=> _makingPhoneCall(),
+                        child: const Padding(
+                          padding: EdgeInsets.all(20.0),
                           child: Icon(Icons.call,size: 35,color: Colors.blue,),
                         ),
                       ),
 
-                      Padding(
-                        padding: const EdgeInsets.all(25.0),
-                        child: Icon(Icons.whatsapp,size: 35,color: Colors.green,),
-                      )
+                      GestureDetector(
+                        onTap : ()=> _sendingWhatsappMessage(),
+                        child: const Padding(
+                          padding: EdgeInsets.all(25.0),
+                          child: Icon(Icons.whatsapp,size: 35,color: Colors.green,),
+                        ),
+                      ),
+                        GestureDetector(
+                          onTap : ()=> _sendingSms(),
+                          child: const Padding(
+                            padding: EdgeInsets.all(25.0),
+                            child: Icon(Icons.sms,size: 35,color: Colors.blueGrey,),
+                          ),
+                        )
                       ],
                     ));
                   },
@@ -56,15 +97,15 @@ class ClientDashboard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('Commander une livraison',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                          const Text('Commander une livraison',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(),
+                              const SizedBox(),
                               Image.asset("assets/images/moto.png"),
                               Image.asset("assets/images/auto.png"),
-                              SizedBox(),
+                              const SizedBox(),
                             ],
                           ),
                         ],
@@ -73,7 +114,10 @@ class ClientDashboard extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: ()=>Get.to(()=>ClientHome()),
+                  onTap: ()=>{
+                    trackingController.initializeTrackingController(),
+                    Get.to(()=>ClientHome())
+                  },
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Container(
@@ -87,7 +131,7 @@ class ClientDashboard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('Suivre mon colis',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                          const Text('Suivre mon colis',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                           Image.asset("assets/images/coli.png"),
                         ],
                       ),
@@ -96,7 +140,7 @@ class ClientDashboard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox()
+            const SizedBox()
           ],
         ),
       ),

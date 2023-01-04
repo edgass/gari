@@ -41,17 +41,20 @@ class DeliverHome extends StatelessWidget {
                       child: Container(
                         width: MediaQuery.of(context).size.width*0.5,
                         height: 50,
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12.0)
-                                )
-                            ),
-                            backgroundColor: MaterialStateColor.resolveWith((states) => apCol),
-                          ),// foreground
-                          onPressed: () { Get.to(()=>DemarcheColi(order: orderController.currentOrder,));},
-                          child: Text('GO',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+                        child: GetBuilder<OrderController>(
+                          builder:(value)=> ElevatedButton(
+
+                            style: ButtonStyle(
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12.0)
+                                  )
+                              ),
+                              backgroundColor: MaterialStateColor.resolveWith((states) => value.currentOrder != null ? apCol : Colors.grey),
+                            ),// foreground
+                            onPressed: value.currentOrder != null ? () { Get.to(()=>DemarcheColi(order: orderController.currentOrder,));} : null,
+                            child: Text('GO',style: TextStyle(color: value.currentOrder != null ? Colors.white : Colors.white70,fontWeight: FontWeight.bold,fontSize: 20),),
+                          ),
                         ),
                       ),
 

@@ -59,7 +59,7 @@ class SearchCommandPage extends StatelessWidget {
                       onLongPress: null,
                       onPressed:(){
                         FocusManager.instance.primaryFocus?.unfocus();
-                        value.initializeOrderListFetchingPage();
+                        value.initializeOrderController();
                         value.fetchSingleOrderResponse();
                       },
                       child: value.fetchOrderStatus == FetchOrderEnum.LOADING ? CircularProgressIndicator(color: Colors.white,) : const Text('Rechercher le colis',style: TextStyle(color: Colors.black54,fontWeight: FontWeight.bold),) ,

@@ -50,6 +50,6 @@ class _HomePageState extends State<HomePage> {
     return pageToRender == 0 ? const Scaffold(
         body: Center(child: CircularProgressIndicator(color:  Color(0xFF70bccc),),)) :
     pageToRender == 2 ? const DeliverDashboard() :
-    pageToRender == 3 ? const AdminHome() : const ClientDashboard();
+    pageToRender == 3 ? const AdminHome() :  ClientDashboard();
   }
 }

@@ -46,14 +46,15 @@ class AuthController extends GetxController{
     await auth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) async{
-        await FirebaseAuth.instance
+
+        FirebaseAuth.instance
             .signInWithCredential(credential);
         setAuthState(AuthState.completed);
+        Get.offAll(()=>HomePage());
       /*  FirebaseAuth.instance
             .signInWithCredential(credential).then((cred) => {
 
         });*/
-        setAuthState(AuthState.completed);
     },
       verificationFailed: (FirebaseAuthException e) {
         setAuthState(AuthState.failed);

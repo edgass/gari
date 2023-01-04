@@ -1,4 +1,5 @@
 
+import 'package:gari/client/tracking_controller.dart';
 import 'package:gari/deliver/controller/order_controller.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -11,6 +12,7 @@ class HomeBinding implements Bindings{
   void dependencies() {
     Get.put<AuthController>(AuthController());
     Get.put<OrderController>(OrderController());
+    Get.put<TrackingController>(TrackingController());
 
 
 
