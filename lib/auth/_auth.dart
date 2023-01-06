@@ -12,6 +12,6 @@ class Auth extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthController authController = Get.find<AuthController>();
     return GetBuilder<AuthController>(
-        builder: (value)=>value.authState == AuthState.codeSent ? Otp() : Login());
+        builder: (value)=>value.authState == AuthState.codeSent ? const Otp() : const Login());
   }
 }

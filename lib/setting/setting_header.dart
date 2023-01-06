@@ -21,10 +21,10 @@ class SettingHeader extends StatelessWidget {
                 color: apCol,
                 borderRadius: BorderRadius.circular(100)
             ),
-            child: Icon(Icons.arrow_back,color: Colors.white,),
+            child: const Icon(Icons.arrow_back,color: Colors.white,),
           ),
         ),
-        SizedBox(height: 15,),
+        const SizedBox(height: 15,),
         Text(_auth.currentUser?.phoneNumber ?? "",textAlign: TextAlign.center,style: TextStyle(color: apCol,fontWeight: FontWeight.bold,fontSize: 20),)
       ],
     );

@@ -15,7 +15,7 @@ class SearchCommandPage extends StatelessWidget {
     Color apCol = Theme.of(context).primaryColor;
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(85),
+        preferredSize: const Size.fromHeight(85),
         child: MyAppBar(pageTitle: "Rechercher colis"),
       ),
       body: GetBuilder<OrderController>(
@@ -62,12 +62,12 @@ class SearchCommandPage extends StatelessWidget {
                         value.initializeOrderController();
                         value.fetchSingleOrderResponse();
                       },
-                      child: value.fetchOrderStatus == FetchOrderEnum.LOADING ? CircularProgressIndicator(color: Colors.white,) : const Text('Rechercher le colis',style: TextStyle(color: Colors.black54,fontWeight: FontWeight.bold),) ,
+                      child: value.fetchOrderStatus == FetchOrderEnum.LOADING ? const CircularProgressIndicator(color: Colors.white,) : const Text('Rechercher le colis',style: TextStyle(color: Colors.black54,fontWeight: FontWeight.bold),) ,
                     ),
                 ),
               ),
-              SizedBox(height: 40,),
-              CommandList()
+              const SizedBox(height: 40,),
+              const CommandList()
             ],
           ),
         ),

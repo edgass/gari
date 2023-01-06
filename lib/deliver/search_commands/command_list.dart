@@ -12,9 +12,9 @@ class CommandList extends StatelessWidget {
     OrderController orderController = Get.find<OrderController>();
     return GetBuilder<OrderController>(
         builder:(value)=> value.fetchOrderStatus == FetchOrderEnum.LOADING ?
-           CircularProgressIndicator():
+           const Text("Patientez SVP..."):
           orderController.currentOrder != null ?
-           SingleOrderDetail() : Center(child : Text("Entrez un code valide pour retrouver votre colis"))
+           const SingleOrderDetail() : const Center(child : Text("Entrez un code valide pour retrouver votre colis"))
     );
   }
 }

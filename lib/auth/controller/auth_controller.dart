@@ -45,12 +45,11 @@ class AuthController extends GetxController{
     setAuthState(AuthState.sending);
     await auth.verifyPhoneNumber(
       phoneNumber: phoneNumber,
-      verificationCompleted: (PhoneAuthCredential credential) async{
+      verificationCompleted: (PhoneAuthCredential credential) {
 
         FirebaseAuth.instance
             .signInWithCredential(credential);
         setAuthState(AuthState.completed);
-        Get.offAll(()=>HomePage());
       /*  FirebaseAuth.instance
             .signInWithCredential(credential).then((cred) => {
 
@@ -67,6 +66,7 @@ class AuthController extends GetxController{
     },
       codeAutoRetrievalTimeout: (String verificationId) {
         setAuthState(AuthState.timeout);
+    //    Get.snackbar("Erreur OTP", "Votre code a expiré, veuillez refaire la demande.",colorText: Colors.white,backgroundColor: Colors.red,snackPosition:SnackPosition.BOTTOM);
     },
 
     );

@@ -1,41 +1,20 @@
+
 import 'package:flutter/material.dart';
 import 'package:gari/appBar.dart';
 import 'package:gari/client/tracking_controller.dart';
+import 'package:gari/client/contact_dialog.dart' as contact;
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:open_whatsapp/open_whatsapp.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:whatsapp_share2/whatsapp_share2.dart';
+import 'dart:io' show Platform;
 
 import 'client_home.dart';
 class ClientDashboard extends StatelessWidget {
    ClientDashboard({Key? key}) : super(key: key);
-  String phoneNumber = '00221784029122';
+  String phoneNumber = '+221784029122';
   String message = 'Bonjour GARI, je voudrais commander une livraison. Merci';
-   _makingPhoneCall() async {
-     var url = Uri.parse("tel:$phoneNumber");
-     if (await canLaunchUrl(url)) {
-       await launchUrl(url);
-     } else {
-       throw 'Could not launch $url';
-     }
-   }
-
-   _sendingWhatsappMessage() async {
-     var url = Uri.parse("https://wa.me/$phoneNumber/?text=${Uri.parse(message)}");
-     if (await canLaunchUrl(url)) {
-       await launchUrl(url);
-     } else {
-       throw 'Could not launch $url';
-     }
-   }
-
-   _sendingSms() async {
-     var url = Uri.parse("sms:$phoneNumber?body=$message");
-     if (await canLaunchUrl(url)) {
-       await launchUrl(url);
-     } else {
-       throw 'Could not launch $url';
-     }
-   }
 
   @override
   Widget build(BuildContext context) {
@@ -56,33 +35,7 @@ class ClientDashboard extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: (){
-                    Get.defaultDialog(title: "Contacter le livreur",titleStyle: TextStyle(color: apCol),content: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                      GestureDetector(
-                        onTap : ()=> _makingPhoneCall(),
-                        child: const Padding(
-                          padding: EdgeInsets.all(20.0),
-                          child: Icon(Icons.call,size: 35,color: Colors.blue,),
-                        ),
-                      ),
-
-                      GestureDetector(
-                        onTap : ()=> _sendingWhatsappMessage(),
-                        child: const Padding(
-                          padding: EdgeInsets.all(25.0),
-                          child: Icon(Icons.whatsapp,size: 35,color: Colors.green,),
-                        ),
-                      ),
-                        GestureDetector(
-                          onTap : ()=> _sendingSms(),
-                          child: const Padding(
-                            padding: EdgeInsets.all(25.0),
-                            child: Icon(Icons.sms,size: 35,color: Colors.blueGrey,),
-                          ),
-                        )
-                      ],
-                    ));
+                    contact.contactDialog().openContactDialog(context, "Contacter le livreur", phoneNumber, message);
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(top: 20.0),

@@ -19,8 +19,8 @@ class SettingHome extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SettingHeader(),
-            SettingActions(),
+            const SettingHeader(),
+            const SettingActions(),
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child: Container(
@@ -29,9 +29,9 @@ class SettingHome extends StatelessWidget {
                 child: ElevatedButton(// foreground
                   onPressed: (){
                     FirebaseAuth.instance.signOut();
-                    Get.offAll(()=>Login());
+                    Get.offAll(()=>const Login());
                   },
-                  child: Text('Se deconnecter',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                  child: const Text('Se deconnecter',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(

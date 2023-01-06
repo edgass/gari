@@ -18,7 +18,7 @@ class ColiCodeGenerateForm extends StatelessWidget {
           padding: const EdgeInsets.only(left: 15.0),
           child: Text("Client",style: TextStyle(color: apCol,fontSize: 16,fontWeight: FontWeight.bold),),
         ),
-        SizedBox(height: 5,),
+        const SizedBox(height: 5,),
         Container(
           width: MediaQuery.of(context).size.width*0.8,
           child: TextField(
@@ -39,7 +39,7 @@ class ColiCodeGenerateForm extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 15,),
+        const SizedBox(height: 15,),
         Container(
           width: MediaQuery.of(context).size.width*0.8,
           child: TextField(
@@ -62,14 +62,14 @@ class ColiCodeGenerateForm extends StatelessWidget {
         ),
 
 
-        SizedBox(height: 15,),
+        const SizedBox(height: 15,),
 
 
         Padding(
           padding: const EdgeInsets.only(left: 15.0),
           child: Text("Point de livraison",style: TextStyle(color: apCol,fontSize: 16,fontWeight: FontWeight.bold),),
         ),
-        SizedBox(height: 5,),
+        const SizedBox(height: 5,),
         Container(
           width: MediaQuery.of(context).size.width*0.8,
           child: TextField(
@@ -90,7 +90,7 @@ class ColiCodeGenerateForm extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 20,),
+        const SizedBox(height: 20,),
         Container(
           width: MediaQuery.of(context).size.width*0.8,
           child: TextField(
@@ -111,7 +111,7 @@ class ColiCodeGenerateForm extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 20,),
+        const SizedBox(height: 20,),
         Container(
           width: MediaQuery.of(context).size.width*0.8,
           child: TextField(
@@ -157,10 +157,10 @@ class ColiCodeGenerateForm extends StatelessWidget {
                 },
                 child: GetBuilder<OrderController> (
                  // initState: orderController(),
-                  builder: (value)=>value.createOrderStatus == CreateOrderEnum.CREATING ? Padding(
-                    padding: const EdgeInsets.all(3.0),
+                  builder: (value)=>value.createOrderStatus == CreateOrderEnum.CREATING ? const Padding(
+                    padding: EdgeInsets.all(3.0),
                     child: CircularProgressIndicator(),
-                  )  : Text('Générer un code de suivi colis',style: TextStyle(color: Colors.white),),
+                  )  : const Text('Générer un code de suivi colis',style: TextStyle(color: Colors.white),),
                 ),
               ),
             ),

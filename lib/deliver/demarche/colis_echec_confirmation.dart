@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gari/deliver/controller/order_controller.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 class ColisEchecConfirmation extends StatefulWidget {
@@ -13,37 +14,38 @@ class _ColisEchecConfirmationState extends State<ColisEchecConfirmation> {
   @override
   Widget build(BuildContext context) {
     Color apCol = Theme.of(context).primaryColor;
+    OrderController orderController = Get.find<OrderController>();
     return Column(
       children: [
         RadioListTile(
           title: const Text("Destinataire absent"),
           activeColor: apCol,
-          value: "absent",
+          value: "Destinataire absent",
           groupValue: motif,
           onChanged: (String? value) { setState((){motif = value.toString();});},
         ),
         RadioListTile(
           activeColor: apCol,
           title: const Text("Colis endommagé"),
-          value: "endommage",
+          value: "Colis endommagé",
           groupValue: motif, onChanged: (String? value) { setState((){motif = value.toString();});},
         ),
         RadioListTile(
           activeColor: apCol,
           title: const Text("Erreur destination"),
-          value: "erreur",
+          value: "Erreur destination",
           groupValue: motif, onChanged: (String? value) { setState((){motif = value.toString();}); },
         ),
         RadioListTile(
           activeColor: apCol,
           title: const Text("Destinataire injoignable"),
-          value: "injoingnable",
+          value: "Destinataire injoignable",
           groupValue: motif, onChanged: (String? value) { setState((){motif = value.toString();});},
         ),
         RadioListTile(
           activeColor: apCol,
           title: const Text("Retour du colis"),
-          value: "retour",
+          value: "Retour du colis",
           groupValue: motif, onChanged: (String? value) {setState((){motif = value.toString();});},
         ),
         RadioListTile(
@@ -82,7 +84,9 @@ class _ColisEchecConfirmationState extends State<ColisEchecConfirmation> {
                       width: MediaQuery.of(context).size.width*0.5,
                       height: 50,
                       child: ElevatedButton(// foreground
-                        onPressed: () { },
+                        onPressed: () {
+                          orderController.changeOrderStatus("FAILURE");
+                        },
                         style: ButtonStyle(
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
@@ -107,7 +111,9 @@ class _ColisEchecConfirmationState extends State<ColisEchecConfirmation> {
             width: MediaQuery.of(context).size.width*0.5,
             height: 50,
             child: ElevatedButton(// foreground
-              onPressed: () { },
+              onPressed: () {
+                orderController.changeOrderStatus("FAILURE");
+              },
               child: const Text('Envoyer',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
               style: ButtonStyle(
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(

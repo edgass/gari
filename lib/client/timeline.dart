@@ -59,22 +59,22 @@ class Timeline extends StatelessWidget {
                      value.setIdOrderToTrack("GARI${_codeController.text}");
                       value.fetchTrackingListOnce(trackingController.idOrderToTrack ?? "");
                     },
-                    child: value.fetchTrackingStatus == FetchTrackingEnum.LOADING ? CircularProgressIndicator(color: Colors.white,) : const Text('Rechercher le colis',style: TextStyle(color: Colors.black54,fontWeight: FontWeight.bold),) ,
+                    child: value.fetchTrackingStatus == FetchTrackingEnum.LOADING ? const CircularProgressIndicator(color: Colors.white,) : const Text('Rechercher le colis',style: TextStyle(color: Colors.black54,fontWeight: FontWeight.bold),) ,
                   ),
                 ),
               ),
             ),
-         TimelineBody()
-         /* GetBuilder<TrackingController>(
-              builder: (value)=> value.fetchTrackingStatus == FetchTrackingEnum.LOADING ? Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Center(child: CircularProgressIndicator(color: appCol,)),
+      //   TimelineBody()
+          GetBuilder<TrackingController>(
+              builder: (value)=> value.fetchTrackingStatus == FetchTrackingEnum.LOADING ? const Padding(
+                padding: EdgeInsets.all(30.0),
+                child: Center(child: Text("Patientez SVP...")),
               ) :
-                  value.orderListEtape != null ? TimelineBody() : Padding(
-                    padding: const EdgeInsets.all(30.0),
+                  value.orderListEtape != null ? TimelineBody() : const Padding(
+                    padding: EdgeInsets.all(30.0),
                     child: Center(child: Text("Entrer le code du colis"),),
                   )
-          )*/
+          )
 
         ],
       ),

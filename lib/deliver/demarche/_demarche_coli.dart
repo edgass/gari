@@ -29,29 +29,31 @@ class DemarcheColi extends StatelessWidget {
             children: [
               InfoColis(orderModel: orderController.currentOrder,),
               Expanded(child: ColisActions()),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width*0.7,
-                  height: 40,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12.0)
-                          )
-                      ),
-                      backgroundColor: MaterialStateColor.resolveWith((states) => Colors.grey),
-                    ),//  foreground
-                    onPressed: () => Get.defaultDialog(
-                      title: 'Motif',
-                      titleStyle: TextStyle(color: apCol,fontWeight: FontWeight.bold),
-                      content: ColisEchecConfirmation(),
+              GetBuilder<OrderController>(
+                builder:(value)=> value.currentOrder?.failure == false ? Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width*0.7,
+                    height: 40,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12.0)
+                            )
+                        ),
+                        backgroundColor: MaterialStateColor.resolveWith((states) => Colors.grey),
+                      ),//  foreground
+                      onPressed: () => Get.defaultDialog(
+                        title: 'Motif',
+                        titleStyle: TextStyle(color: apCol,fontWeight: FontWeight.bold),
+                        content: ColisEchecConfirmation(),
 
+                      ),
+                      child: Text('Livraison échouée',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                     ),
-                    child: Text('Livraison échouée',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                   ),
-                ),
+                ) : SizedBox(),
               ),
             ],
           ),

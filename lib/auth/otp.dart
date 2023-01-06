@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gari/auth/login.dart';
+import 'package:gari/home_page.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -32,7 +34,7 @@ class _OtpState extends State<Otp> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 20),
+          padding: const EdgeInsets.only(bottom: 20,left: 18,right: 18),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,14 +70,16 @@ class _OtpState extends State<Otp> {
                   }
                 },
               ),
-              Padding(
+/*              Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: Container(
                   width: MediaQuery.of(context).size.width*0.5,
                   height: 50,
                   child: ElevatedButton(// foreground
-                    onPressed: () { },
-                    child: Text('Renvoyer le code',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                    onPressed: ()=>{
+
+                    },
+                    child: Text('Valider',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
                       style: ButtonStyle(
                         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
@@ -86,14 +90,28 @@ class _OtpState extends State<Otp> {
                       ),
                   ),
                 ),
-              ),
+              ),*/
               Padding(
-                padding: const EdgeInsets.only(top: 10.0),
-                child: GestureDetector(
-                    onTap: (){
-                      Get.back();
-                    },
-                    child: Text('Annuler',style: TextStyle(color: apCol),)),
+                padding: const EdgeInsets.only(top: 20.0,left: 50,right: 50),
+                child: Column(
+               //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                        onTap: (){
+                          null;
+                        },
+                        child: Text('Valider',style: TextStyle(color: apCol,fontSize: 20),)),
+                    SizedBox(height: 20,),
+                    GetBuilder<AuthController>(
+                      builder:(value)=> value.authState == AuthState.sending ? const CircularProgressIndicator() : GestureDetector(
+                          onTap: (){
+                           authController.verifyNumber(authController.numberToVerify);
+                          },
+                          child: Text('Renvoyer le code',style: TextStyle(color: Colors.green),)),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gari/client/tracking_controller.dart';
 import 'package:gari/models/tracking_model.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 class TimelineBody extends StatelessWidget {
    TimelineBody({Key? key}) : super(key: key);
@@ -18,7 +17,7 @@ class TimelineBody extends StatelessWidget {
           BuildContext context,
           AsyncSnapshot<List<TrackingModel>> snapshot,
       ) {
-        if(snapshot.hasData){
+        if(snapshot.hasData && snapshot.data?.firstWhereOrNull((element) => element.type == 'FAILURE') == null){
         return Column(
            children: [
              TimelineTile(
@@ -42,7 +41,7 @@ class TimelineBody extends StatelessWidget {
                        child:Padding(
                          padding: const EdgeInsets.all(8.0),
                          child:
-                         Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'PICKED_UP') != null ? "${snapshot.data![0].createdAt.day}/${snapshot.data![0].createdAt.month}/${snapshot.data![0].createdAt.year}" : "--/--/---",textAlign:TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 10),),
+                         Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'PICKED_UP') != null ? "${snapshot.data![0].createdAt.day}/${snapshot.data![0].createdAt.month}/${snapshot.data![0].createdAt.year}" : "--/--/---",textAlign:TextAlign.center,style: const TextStyle(color: Colors.white,fontSize: 10),),
                        ) ,
                        //  color: Colors.grey,
                      ),
@@ -53,8 +52,8 @@ class TimelineBody extends StatelessWidget {
                        ),
                        width: MediaQuery.of(context).size.width*0.15,
                        child: Padding(
-                         padding: EdgeInsets.all(8.0),
-                         child: Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'PICKED_UP') != null ? "${snapshot.data![0].createdAt.hour}:${snapshot.data![0].createdAt.minute}" : "--:--",textAlign:TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 10),),
+                         padding: const EdgeInsets.all(8.0),
+                         child: Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'PICKED_UP') != null ? "${snapshot.data![0].createdAt.hour}:${snapshot.data![0].createdAt.minute}" : "--:--",textAlign:TextAlign.center,style: const TextStyle(color: Colors.white,fontSize: 10),),
                        ) ,
                      ),
                      Container(
@@ -63,8 +62,8 @@ class TimelineBody extends StatelessWidget {
                            color:snapshot.data?.firstWhereOrNull((element) => element.type == 'PICKED_UP') != null ? appCol : Colors.grey.withOpacity(0.2)
                        ),
                        width: MediaQuery.of(context).size.width*0.4,
-                       child: Padding(
-                         padding: const EdgeInsets.all(8.0),
+                       child: const Padding(
+                         padding: EdgeInsets.all(8.0),
                          child: Text("Collecte du colis",style: TextStyle(color: Colors.white,fontSize: 10),),
                        ),
                      )
@@ -107,7 +106,7 @@ class TimelineBody extends StatelessWidget {
                        child:Padding(
                          padding: const EdgeInsets.all(8.0),
                          child:
-                         Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'ON_WAY') != null ? "${snapshot.data![1].createdAt.day}/${snapshot.data![1].createdAt.month}/${snapshot.data![1].createdAt.year}" : "--/--/---",textAlign:TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 10),),
+                         Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'ON_WAY') != null ? "${snapshot.data![1].createdAt.day}/${snapshot.data![1].createdAt.month}/${snapshot.data![1].createdAt.year}" : "--/--/---",textAlign:TextAlign.center,style: const TextStyle(color: Colors.white,fontSize: 10),),
                        ) ,
                        //  color: Colors.grey,
                      ),
@@ -118,8 +117,8 @@ class TimelineBody extends StatelessWidget {
                        ),
                        width: MediaQuery.of(context).size.width*0.15,
                        child: Padding(
-                         padding: EdgeInsets.all(8.0),
-                         child: Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'ON_WAY') != null ? "${snapshot.data![1].createdAt.hour}:${snapshot.data![1].createdAt.minute}" : "--:--",textAlign:TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 10),),
+                         padding: const EdgeInsets.all(8.0),
+                         child: Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'ON_WAY') != null ? "${snapshot.data![1].createdAt.hour}:${snapshot.data![1].createdAt.minute}" : "--:--",textAlign:TextAlign.center,style: const TextStyle(color: Colors.white,fontSize: 10),),
                        ) ,
                      ),
                      Container(
@@ -128,8 +127,8 @@ class TimelineBody extends StatelessWidget {
                            color:snapshot.data?.firstWhereOrNull((element) => element.type == 'ON_WAY') != null ? appCol : Colors.grey.withOpacity(0.2)
                        ),
                        width: MediaQuery.of(context).size.width*0.4,
-                       child: Padding(
-                         padding: const EdgeInsets.all(8.0),
+                       child: const Padding(
+                         padding: EdgeInsets.all(8.0),
                          child: Text("En route pour livraison",style: TextStyle(color: Colors.white,fontSize: 10),),
                        ),
                      )
@@ -172,7 +171,7 @@ class TimelineBody extends StatelessWidget {
                        child:Padding(
                          padding: const EdgeInsets.all(8.0),
                          child:
-                         Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'ARRIVED') != null ? "${snapshot.data![2].createdAt.day}/${snapshot.data![2].createdAt.month}/${snapshot.data![2].createdAt.year}" : "--/--/---",textAlign:TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 10),),
+                         Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'ARRIVED') != null ? "${snapshot.data![2].createdAt.day}/${snapshot.data![2].createdAt.month}/${snapshot.data![2].createdAt.year}" : "--/--/---",textAlign:TextAlign.center,style: const TextStyle(color: Colors.white,fontSize: 10),),
                        ) ,
                        //  color: Colors.grey,
                      ),
@@ -183,8 +182,8 @@ class TimelineBody extends StatelessWidget {
                        ),
                        width: MediaQuery.of(context).size.width*0.15,
                        child: Padding(
-                         padding: EdgeInsets.all(8.0),
-                         child: Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'ARRIVED') != null ? "${snapshot.data![2].createdAt.hour}:${snapshot.data![2].createdAt.minute}" : "--:--",textAlign:TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 10),),
+                         padding: const EdgeInsets.all(8.0),
+                         child: Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'ARRIVED') != null ? "${snapshot.data![2].createdAt.hour}:${snapshot.data![2].createdAt.minute}" : "--:--",textAlign:TextAlign.center,style: const TextStyle(color: Colors.white,fontSize: 10),),
                        ) ,
                      ),
                      Container(
@@ -193,8 +192,8 @@ class TimelineBody extends StatelessWidget {
                            color:snapshot.data?.firstWhereOrNull((element) => element.type == 'ARRIVED') != null ? appCol : Colors.grey.withOpacity(0.2)
                        ),
                        width: MediaQuery.of(context).size.width*0.4,
-                       child: Padding(
-                         padding: const EdgeInsets.all(8.0),
+                       child: const Padding(
+                         padding: EdgeInsets.all(8.0),
                          child: Text("Arrivé à destination",style: TextStyle(color: Colors.white,fontSize: 10),),
                        ),
                      )
@@ -238,7 +237,7 @@ class TimelineBody extends StatelessWidget {
                        child:Padding(
                          padding: const EdgeInsets.all(8.0),
                          child:
-                         Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'DROP_OUT') != null ? "${snapshot.data![3].createdAt.day}/${snapshot.data![3].createdAt.month}/${snapshot.data![3].createdAt.year}" : "--/--/---",textAlign:TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 10),),
+                         Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'DROP_OUT') != null ? "${snapshot.data![3].createdAt.day}/${snapshot.data![3].createdAt.month}/${snapshot.data![3].createdAt.year}" : "--/--/---",textAlign:TextAlign.center,style: const TextStyle(color: Colors.white,fontSize: 10),),
                        ) ,
                        //  color: Colors.grey,
                      ),
@@ -249,8 +248,8 @@ class TimelineBody extends StatelessWidget {
                        ),
                        width: MediaQuery.of(context).size.width*0.15,
                        child: Padding(
-                         padding: EdgeInsets.all(8.0),
-                         child: Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'DROP_OUT') != null ? "${snapshot.data![3].createdAt.hour}:${snapshot.data![3].createdAt.minute}" : "--:--",textAlign:TextAlign.center,style: TextStyle(color: Colors.white,fontSize: 10),),
+                         padding: const EdgeInsets.all(8.0),
+                         child: Text(snapshot.data?.firstWhereOrNull((element) => element.type == 'DROP_OUT') != null ? "${snapshot.data![3].createdAt.hour}:${snapshot.data![3].createdAt.minute}" : "--:--",textAlign:TextAlign.center,style: const TextStyle(color: Colors.white,fontSize: 10),),
                        ) ,
                      ),
                      Container(
@@ -259,8 +258,8 @@ class TimelineBody extends StatelessWidget {
                            color:snapshot.data?.firstWhereOrNull((element) => element.type == 'DROP_OUT') != null ? appCol : Colors.grey.withOpacity(0.2)
                        ),
                        width: MediaQuery.of(context).size.width*0.4,
-                       child: Padding(
-                         padding: const EdgeInsets.all(8.0),
+                       child: const Padding(
+                         padding: EdgeInsets.all(8.0),
                          child: Text("Livré",style: TextStyle(color: Colors.white,fontSize: 10),),
                        ),
                      )
@@ -289,7 +288,7 @@ class TimelineBody extends StatelessWidget {
            ],
          );
        }else{
-          return GetBuilder<TrackingController>(
+          return /*GetBuilder<TrackingController>(
             builder:(value)=>
             value.fetchTrackingStatus == FetchTrackingEnum.LOADING ? Padding(
               padding: const EdgeInsets.all(30.0),
@@ -298,18 +297,34 @@ class TimelineBody extends StatelessWidget {
             value.orderListEtape == null ? Padding(
               padding: const EdgeInsets.all(30.0),
               child: Center(child: Text("Entrer le code du colis"),),
-            ) :
+            ) :*/
+
+            snapshot.data?.firstWhereOrNull((element) => element.type == 'FAILURE') != null ?
+            Center(
+              child: Column(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Text("Livraison échouée",style: TextStyle(color: Colors.red,fontSize: 35),),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Text("Votre commande sera reprise le plus rapidement possible. Nous nous excusons de ce désagrement.",textAlign: TextAlign.center,style: TextStyle(fontSize: 13),),
+                  ),
+                ],
+              ),
+            ):
             Center(
               child: Column(
                 children: [
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   CircularProgressIndicator(color: apCol,),
-                  SizedBox(height: 20,),
-                  Text("Chargement des informations du colis"),
+                  const SizedBox(height: 20,),
+                  const Text("Chargement des informations du colis"),
                 ],
               ),
-            ),
-          );
+            );
+
         }
   }
     );

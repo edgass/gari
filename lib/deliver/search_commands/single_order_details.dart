@@ -15,8 +15,8 @@ class SingleOrderDetail extends StatelessWidget {
     OrderController orderController = Get.find<OrderController>();
     return Column(
       children: [
-        Text("Votre colis a été retrouvé",textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
-        SizedBox(height: 20,),
+        const Text("Votre colis a été retrouvé",textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
+        const SizedBox(height: 20,),
         InfoColis(orderModel: orderController.currentOrder ,),
         Padding(
           padding: const EdgeInsets.only(top: 20.0),

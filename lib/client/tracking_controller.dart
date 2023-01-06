@@ -71,7 +71,7 @@ class TrackingController extends GetxController{
 
 while(true){
   try{
-    setFetchTrackingStreamStatus(FetchTrackingEnumStream.LOADING);
+ //   setFetchTrackingStreamStatus(FetchTrackingEnumStream.LOADING);
     String? token = await _auth.currentUser?.getIdToken();
     print("$idOrderToTrack jvbzekvbzvbzkjvbzjevbjzvbkzevbkjzevbjkzebvzekvbzekjvbzekjvbvb");
     var response = await get(
@@ -84,15 +84,15 @@ while(true){
     );
 
 //print(json.decode(response.body));
-    setFetchTrackingStreamStatus(FetchTrackingEnumStream.SUCCESS);
+ //   setFetchTrackingStreamStatus(FetchTrackingEnumStream.SUCCESS);
     trackingModelList  = trackingModelFromJson(response.body);
     print("réponse $trackingModelList");
 
   }catch(e){
-    setFetchTrackingStreamStatus(FetchTrackingEnumStream.ERROR);
+  //  setFetchTrackingStreamStatus(FetchTrackingEnumStream.ERROR);
     throw Exception("Erreur de fetch "+e.toString());
   }
-  await Future.delayed(Duration(seconds: 1));
+  await Future.delayed(Duration(seconds: 5));
   yield trackingModelList;
 }
   }
@@ -114,7 +114,9 @@ while(true){
         print("réponse ${response.body}");
 //print(json.decode(response.body));
         setFetchTrackingStatus(FetchTrackingEnum.SUCCESS);
+
         orderListEtape  = trackingModelFromJson(response.body);
+        fetchTrackingListStream;
 
       }catch(e){
         setFetchTrackingStatus(FetchTrackingEnum.ERROR);

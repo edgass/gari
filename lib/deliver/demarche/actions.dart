@@ -18,9 +18,14 @@ class ColisActions extends StatelessWidget {
             BuildContext context,
             AsyncSnapshot<OrderModel> snapshot,
         ) {
-          if(snapshot.hasData){
+          if(snapshot.hasData && snapshot.data?.failure != true){
             return Column(
               children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GetBuilder<OrderController>(
+                      builder:(value)=> value.createOrderStatus == CreateOrderEnum.CREATING ? Text("Patientez SVP...") : Text("")),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Container(
@@ -164,7 +169,22 @@ class ColisActions extends StatelessWidget {
               ],
             );
           }else{
-            return Center(
+            return snapshot.data?.failure == true ?
+            Center(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text("Livraison échouée",style: TextStyle(color: Colors.red,fontSize: 35),),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Text("Veuillez apeller le client dés que possible",style: TextStyle(fontSize: 13),),
+                  ),
+                ],
+              ),
+            ):
+            Center(
               child: Column(
                 children: [
                   SizedBox(height: 20,),

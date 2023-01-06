@@ -6,6 +6,11 @@
         <!-- If your app checks for SMS support -->
         <intent>
             <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
             <data android:scheme="sms" />
         </intent>
         <!-- If your app checks for call support -->
@@ -53,4 +58,5 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+
 </manifest>

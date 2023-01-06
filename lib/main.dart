@@ -1,22 +1,19 @@
 
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gari/auth/login.dart';
-import 'package:gari/client/client_home.dart';
-import 'package:gari/deliver/deliver_home.dart';
-import 'package:gari/setting/_setting_home.dart';
 import 'package:gari/utils/binding.dart';
 import 'package:get/get.dart';
 
 import 'auth/_auth.dart';
-import 'auth/otp.dart';
-import 'client/client_dashboard.dart';
-import 'deliver/demarche/_demarche_coli.dart';
+import 'auth/controller/auth_controller.dart';
 import 'home_page.dart';
-
 void main() async{
+/*  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);*/
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   HomeBinding().dependencies();
@@ -42,9 +39,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor:  Color(0xFF70bccc),
+            seedColor:  const Color(0xFF70bccc),
             brightness: Brightness.light,
-            primary:  Color(0xFF70bccc),
+            primary:  const Color(0xFF70bccc),
             secondary: Colors.amber),
         useMaterial3: true,
         // This is the theme of your application.
@@ -57,17 +54,17 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
        // primarySwatch: Colors.blue,
-        primaryColor: Color(0xFF70bccc),
+        primaryColor: const Color(0xFF70bccc),
       ),
       //home:  ClientHome(),
    //   home:  DeliverHome(),
       home:  StreamBuilder<User?>(
         stream: _auth.authStateChanges(),
-        builder: (context,snapshot){
-        //  return snapshot.data == null ? const Auth() : _auth.currentUser?.phoneNumber =="+221772477730" ? ClientDashboard() : DeliverHome();
+        builder: (context,AsyncSnapshot<User?> snapshot){
+       //   return snapshot.data == null ? const Auth() : _auth.currentUser?.phoneNumber =="" ? ClientDashboard() : HomePage();
          // return snapshot.data == null ? const Auth() : HomePage();
 
-          return snapshot.data == null ? const Login() : const HomePage();
+          return snapshot.data == null ? const Auth() : const HomePage();
         //  return  DeliverHome();
         },
       ),
